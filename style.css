@@ -1,0 +1,613 @@
+/* =========================================================
+   MemoFlash SVG — style.css
+   Estética Neo-Brutalista de caderno de estudos:
+   papel creme, tinta preta (bordas 3px + sombras duras),
+   fita/destaque em amarelo, menta, coral e ciano.
+   CSS3: tokens, grid responsivo, flip 3D, animações
+   (shake, enter, partículas) e anel de foco.
+   ========================================================= */
+
+:root {
+  --paper: #f4f0ea;
+  --ink: #111111;
+  --card: #fffdf7;
+  --yellow: #fde047;
+  --mint: #4ade80;
+  --coral: #fb7185;
+  --cyan: #38bdf8;
+
+  --muted: #3f3f46;
+  --line: rgba(17, 17, 17, 0.22);
+  --focus: #111111;
+
+  /* sans pesada (títulos) + monoespaçada (contadores, atalhos, badges) */
+  --font-display: "Arial Black", "Segoe UI Black", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: Consolas, "Cascadia Mono", "Courier New", ui-monospace, monospace;
+
+  --radius: 8px;
+  --radius-sm: 6px;
+  --space: clamp(14px, 2.4vw, 22px);
+
+  /* molduras neo-brutalistas: borda grossa + sombra dura sem blur */
+  --border: 3px solid var(--ink);
+  --shadow: 5px 5px 0 var(--ink);
+  --shadow-hover: 7px 7px 0 var(--ink);
+  --shadow-press: 2px 2px 0 var(--ink);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* superfície de papel: creme com textura de pontos e pauta sutil
+   produzida exclusivamente com gradientes (sem imagens externas) */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(17, 17, 17, 0.09) 1px, transparent 0),
+    linear-gradient(rgba(56, 189, 248, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px, 96px 96px, 96px 96px;
+}
+
+h1, h2, h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+p {
+  margin: 0 0 0.6rem;
+}
+
+ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  padding: 0.1em 0.5em;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+/* ---------- acessibilidade ---------- */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 50;
+  padding: 0.7rem 1rem;
+  background: var(--ink);
+  color: var(--card);
+  font-weight: 700;
+  border-radius: 0 0 var(--radius-sm) 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+
+.is-hidden {
+  display: none;
+}
+
+/* ---------- cabeçalho / rodapé ---------- */
+
+.site-header,
+.site-footer {
+  width: min(1180px, 100%);
+  margin-inline: auto;
+  padding-inline: var(--space);
+}
+
+.site-header {
+  padding-top: clamp(20px, 4vw, 40px);
+  padding-bottom: clamp(12px, 2vw, 20px);
+  border-bottom: var(--border);
+}
+
+/* título com marca-texto amarelo por baixo (sem depender de fonte externa) */
+.site-header h1 {
+  display: inline-block;
+  padding: 0 8px;
+  font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  background-image: linear-gradient(
+    transparent 55%,
+    var(--yellow) 55%,
+    var(--yellow) 94%,
+    transparent 94%
+  );
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+}
+
+.site-footer {
+  margin-top: auto;
+  padding-top: clamp(18px, 3vw, 30px);
+  padding-bottom: clamp(18px, 3vw, 30px);
+  border-top: var(--border);
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0 0 0.35rem;
+}
+
+/* atalhos do rodapé em monoespaçada (par tipográfico do app) */
+.shortcuts {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+/* ---------- layout principal ---------- */
+
+.layout {
+  width: min(1180px, 100%);
+  margin-inline: auto;
+  padding: clamp(8px, 2vw, 16px) var(--space) clamp(20px, 4vw, 40px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 350px);
+  gap: clamp(18px, 3vw, 34px);
+  align-items: start;
+}
+
+.study,
+.sidebar {
+  min-width: 0;
+}
+
+/* painéis: moldura 3px + sombra dura (sem blur) */
+.study {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.sidebar {
+  display: grid;
+  gap: 18px;
+  background: var(--card);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(14px, 2vw, 20px);
+}
+
+.study h2,
+.sidebar h2 {
+  display: inline-block;
+  padding-bottom: 4px;
+  border-bottom: 4px solid var(--yellow);
+}
+
+.card-counter {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- cartão: palco, perspectiva e flip 3D ---------- */
+
+.card-stage {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin-inline: auto;
+  perspective: 1200px;
+}
+
+.card-scene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 540 / 360;
+  border-radius: 18px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.25, 1);
+  cursor: pointer;
+}
+
+.card-scene.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.card-particles {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* tinta do cartão: texto preto sobre papel (sem contorno) */
+.card-text {
+  font-family: var(--font-body);
+  font-weight: 600;
+  fill: var(--ink);
+}
+
+/* badge, carimbo e leituras numéricas em monoespaçada */
+.badge-text {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  fill: var(--ink);
+}
+
+.stamp-text {
+  font-family: var(--font-mono);
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  fill: var(--coral);
+}
+
+.card-empty {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 900;
+  fill: var(--ink);
+}
+
+/* ---------- controles ---------- */
+
+/* Organiza os 7 botões em um layout simétrico: 3 principais em cima, 4 secundários embaixo */
+.controls {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* Primeira linha: Anterior (4 col), Virar (4 col), Próximo (4 col) */
+.controls .btn:nth-child(1),
+.controls .btn:nth-child(2),
+.controls .btn:nth-child(3) {
+  grid-column: span 4;
+}
+
+/* Segunda linha: Aprendido, Embaralhar, Excluir, Restaurar (3 col cada = 12 col) */
+.controls .btn:nth-child(4),
+.controls .btn:nth-child(5),
+.controls .btn:nth-child(6),
+.controls .btn:nth-child(7) {
+  grid-column: span 3;
+  font-size: 0.88rem;
+  padding: 0.5rem 0.6rem;
+}
+
+.btn {
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  font-weight: 700;
+  min-height: 46px;
+  padding: 0.6rem 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--ink);
+  background: var(--card);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease;
+}
+
+/* microinteração: sobe e projeta sombra maior ao passar o mouse */
+.btn:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 #111111;
+}
+
+/* microinteração: afunda e recolhe a sombra ao ser pressionado */
+.btn:active:not(:disabled) {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 #111111;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 3px 3px 0 rgba(17, 17, 17, 0.35);
+}
+
+.btn-primary {
+  background: var(--yellow);
+}
+
+.btn-cyan {
+  background: var(--cyan);
+}
+
+.btn-success[aria-pressed="true"] {
+  background: var(--mint);
+}
+
+.btn-danger {
+  background: var(--coral);
+}
+
+.btn-ghost {
+  background: transparent;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-icon {
+  flex: none;
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- formulário (aside) ---------- */
+
+.card-form {
+  display: grid;
+  gap: 12px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.field textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 74px;
+  padding: 0.65rem 0.75rem;
+  font: inherit;
+  color: var(--ink);
+  background: #ffffff;
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+}
+
+.field textarea::placeholder {
+  color: #71717a;
+}
+
+.form-warning {
+  min-height: 1.4em;
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+/* aviso ativo vira um bloco coral com moldura preta */
+.form-warning:not(:empty) {
+  padding: 0.5rem 0.7rem;
+  background: var(--coral);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+/* ---------- painéis do aside ---------- */
+
+.progress-panel,
+.tips-panel {
+  background: var(--paper);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  padding: 12px 14px 14px;
+}
+
+.progress-panel h3,
+.tips-panel h3 {
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.progress-svg {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+}
+
+.progress-track {
+  fill: var(--card);
+}
+
+.progress-fill {
+  fill: var(--mint);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-pct {
+  font-family: var(--font-mono);
+  font-size: 30px;
+  font-weight: 900;
+  fill: var(--ink);
+}
+
+.progress-count {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  fill: var(--muted);
+}
+
+.progress-done {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 900;
+  fill: var(--ink);
+}
+
+.tips {
+  color: var(--muted);
+  font-size: 0.93rem;
+  display: grid;
+  gap: 6px;
+}
+
+/* ---------- animações ---------- */
+
+/* aviso de entrada vazio */
+@keyframes shake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-7px); }
+  40%, 60% { transform: translateX(7px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* transição entre cartões (entra pela esquerda: nunca cria rolagem horizontal) */
+@keyframes cardEnter {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.card-stage.is-entering {
+  animation: cardEnter 0.45s ease both;
+}
+
+/* partículas em SVG ao marcar como aprendido (tom vindo de --tone) */
+@keyframes particleBurst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(0.15);
+    opacity: 0;
+  }
+}
+
+.particle-burst circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  fill: var(--tone, #fde047);
+  animation: particleBurst 0.75s cubic-bezier(0.2, 0.7, 0.3, 1) var(--delay, 0s) forwards;
+}
+
+/* ---------- responsividade ---------- */
+
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card-stage {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 430px) {
+  :root {
+    --space: 12px;
+  }
+
+  .controls {
+    grid-template-columns: repeat(auto-fit, minmax(126px, 1fr));
+  }
+
+  .btn {
+    padding: 0.6rem 0.7rem;
+    font-size: 0.95rem;
+  }
+
+  .card-scene {
+    border-radius: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-scene {
+    transition-duration: 0.01ms;
+  }
+
+  .card-stage.is-entering,
+  .shake,
+  .particle-burst circle {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+
+  .btn {
+    transition: none;
+  }
+}

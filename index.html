@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; media-src 'none'; manifest-src 'none'; worker-src 'none'; require-trusted-types-for 'script'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MemoFlash SVG — aplicação de flashcards interativos em SVG para a disciplina de Desenvolvimento de Sistemas Web.">
+  <title>MemoFlash SVG — Flashcards de Desenvolvimento Web</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#estudo">Pular para a área de estudo</a>
+
+  <header class="site-header">
+    <h1>MemoFlash SVG</h1>
+    <p class="subtitle">Flashcards interativos renderizados em SVG — disciplina de Desenvolvimento de Sistemas Web</p>
+  </header>
+
+  <main class="layout">
+    <section id="estudo" class="study" aria-labelledby="titulo-estudo">
+      <h2 id="titulo-estudo">Área de estudo</h2>
+
+      <p id="cardCounter" class="card-counter" aria-live="polite">—</p>
+
+      <div class="card-stage" id="cardStage">
+        <div
+          class="card-scene"
+          id="cardScene"
+          role="button"
+          tabindex="0"
+          aria-label="Flashcard atual. Ative para virar o cartão ou pressione Espaço."
+        >
+          <!-- Frente: PERGUNTA -->
+          <svg class="card-face card-front" viewBox="0 0 540 360" preserveAspectRatio="xMidYMid meet" aria-hidden="false" focusable="false">
+            <defs>
+              <!-- fita washi listrada (padrão em amarelo) -->
+              <pattern id="tapePatternFront" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+                <rect width="14" height="14" fill="#fde047"></rect>
+                <rect width="7" height="14" fill="#fef08a"></rect>
+              </pattern>
+            </defs>
+
+            <!-- pilha de fichas atrás da atual: ciano e coral, levemente tortas -->
+            <rect class="stack-card stack-cyan" x="34" y="26" width="472" height="310" rx="16" fill="#38bdf8" stroke="#111111" stroke-width="3" transform="rotate(-2.5 270 180)"></rect>
+            <rect class="stack-card stack-coral" x="34" y="26" width="472" height="310" rx="16" fill="#fb7185" stroke="#111111" stroke-width="3" transform="rotate(2 270 180)"></rect>
+
+            <!-- sombra dura da ficha principal (+6/+6, sem blur) -->
+            <rect class="card-shadow" x="40" y="32" width="472" height="310" rx="16" fill="#111111"></rect>
+
+            <!-- ficha principal: papel pautado -->
+            <rect class="card-surface" x="34" y="26" width="472" height="310" rx="16" fill="#fffdf7" stroke="#111111" stroke-width="3.5"></rect>
+
+            <!-- pautas horizontais em azul claro -->
+            <g class="ruled-lines" stroke="#93c5fd" stroke-width="1.5">
+              <line x1="50" y1="118" x2="490" y2="118"></line>
+              <line x1="50" y1="148" x2="490" y2="148"></line>
+              <line x1="50" y1="178" x2="490" y2="178"></line>
+              <line x1="50" y1="208" x2="490" y2="208"></line>
+              <line x1="50" y1="238" x2="490" y2="238"></line>
+              <line x1="50" y1="268" x2="490" y2="268"></line>
+              <line x1="50" y1="298" x2="490" y2="298"></line>
+            </g>
+
+            <!-- linha de margem superior (tinta vermelha/coral) -->
+            <line class="margin-line" x1="44" y1="100" x2="496" y2="100" stroke="#fb7185" stroke-width="2.5"></line>
+
+            <g class="card-badge">
+              <rect x="50" y="42" width="216" height="36" rx="8" fill="#fde047" stroke="#111111" stroke-width="2.5"></rect>
+              <text id="badgeFront" class="badge-text" x="158" y="66" text-anchor="middle">FRENTE (PERGUNTA)</text>
+            </g>
+
+            <!-- fita washi no topo, com pontas em zigue-zague, levemente torta -->
+            <path class="washi" d="M284,10 L278,17 L284,24 L278,31 L284,38 L278,45 L422,45 L416,38 L422,31 L416,24 L422,17 L416,10 Z" fill="url(#tapePatternFront)" stroke="#111111" stroke-width="2" opacity="0.85" transform="rotate(-3 350 27)"></path>
+
+            <!-- clipe de papel no canto superior direito -->
+            <<path class="clip" d="M456,26 L456,14 C456,5 478,5 478,14 L478,72 C478,88 460,88 460,72 L460,36 C460,28 470,28 470,36 L470,64" fill="none" stroke="#111111" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"></path>
+
+            <text id="cardTextFront" class="card-text" x="56" y="196"><tspan x="56">Flashcard de exemplo</tspan></text>
+
+            <text id="emptyFront" class="card-empty is-hidden" x="270" y="182" text-anchor="middle">
+              <tspan x="270">O baralho está vazio!</tspan>
+              <tspan x="270" dy="30">Adicione um cartão novo.</tspan>
+            </text>
+
+            <!-- carimbo DOMINADO: só aparece quando o cartão está aprendido -->
+            <g id="stampFront" class="stamp is-hidden" transform="rotate(-12 430 303)">
+              <rect x="370" y="281" width="120" height="44" rx="7" fill="none" stroke="#fb7185" stroke-width="3" stroke-dasharray="12 7"></rect>
+              <rect x="376" y="287" width="108" height="32" rx="5" fill="none" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="5 5"></rect>
+              <text class="stamp-text" x="430" y="311" text-anchor="middle">DOMINADO</text>
+            </g>
+          </svg>
+
+          <!-- Verso: RESPOSTA -->
+          <svg class="card-face card-back" viewBox="0 0 540 360" preserveAspectRatio="xMidYMid meet" aria-hidden="false" focusable="false">
+            <defs>
+              <!-- mesma fita listrada no verso (id próprio para não duplicar) -->
+              <pattern id="tapePatternBack" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+                <rect width="14" height="14" fill="#fde047"></rect>
+                <rect width="7" height="14" fill="#fef08a"></rect>
+              </pattern>
+            </defs>
+
+            <!-- pilha de fichas atrás da atual: ciano e coral, levemente tortas -->
+            <rect class="stack-card stack-cyan" x="34" y="26" width="472" height="310" rx="16" fill="#38bdf8" stroke="#111111" stroke-width="3" transform="rotate(-2.5 270 180)"></rect>
+            <rect class="stack-card stack-coral" x="34" y="26" width="472" height="310" rx="16" fill="#fb7185" stroke="#111111" stroke-width="3" transform="rotate(2 270 180)"></rect>
+
+            <!-- sombra dura da ficha principal (+6/+6, sem blur) -->
+            <rect class="card-shadow" x="40" y="32" width="472" height="310" rx="16" fill="#111111"></rect>
+
+            <!-- verso da ficha: papel verde-menta suave -->
+            <rect class="card-surface" x="34" y="26" width="472" height="310" rx="16" fill="#dcfce7" stroke="#111111" stroke-width="3.5"></rect>
+
+            <!-- pautas horizontais em azul claro -->
+            <g class="ruled-lines" stroke="#93c5fd" stroke-width="1.5">
+              <line x1="50" y1="118" x2="490" y2="118"></line>
+              <line x1="50" y1="148" x2="490" y2="148"></line>
+              <line x1="50" y1="178" x2="490" y2="178"></line>
+              <line x1="50" y1="208" x2="490" y2="208"></line>
+              <line x1="50" y1="238" x2="490" y2="238"></line>
+              <line x1="50" y1="268" x2="490" y2="268"></line>
+              <line x1="50" y1="298" x2="490" y2="298"></line>
+            </g>
+
+            <!-- linha de margem superior (tinta vermelha/coral) -->
+            <line class="margin-line" x1="44" y1="100" x2="496" y2="100" stroke="#fb7185" stroke-width="2.5"></line>
+
+            <g class="card-badge">
+              <rect x="50" y="42" width="216" height="36" rx="8" fill="#fde047" stroke="#111111" stroke-width="2.5"></rect>
+              <text id="badgeBack" class="badge-text" x="158" y="66" text-anchor="middle">VERSO (RESPOSTA)</text>
+            </g>
+
+            <!-- fita washi no topo, com pontas em zigue-zague, levemente torta -->
+            <path class="washi" d="M284,10 L278,17 L284,24 L278,31 L284,38 L278,45 L422,45 L416,38 L422,31 L416,24 L422,17 L416,10 Z" fill="url(#tapePatternBack)" stroke="#111111" stroke-width="2" opacity="0.85" transform="rotate(-3 350 27)"></path>
+
+            <!-- clipe de papel no canto superior direito -->
+            <path class="clip" d="M478,14 L478,74 C478,92 460,92 460,74 L460,36 C460,26 471,26 471,36 L471,64" fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+
+            <text id="cardTextBack" class="card-text" x="56" y="196"><tspan x="56">A resposta aparece ao virar</tspan></text>
+
+            <text id="emptyBack" class="card-empty is-hidden" x="270" y="182" text-anchor="middle">
+              <tspan x="270">O baralho está vazio!</tspan>
+              <tspan x="270" dy="30">Adicione um cartão novo.</tspan>
+            </text>
+
+            <!-- carimbo DOMINADO: só aparece quando o cartão está aprendido -->
+            <g id="stampBack" class="stamp is-hidden" transform="rotate(-12 430 303)">
+              <rect x="370" y="281" width="120" height="44" rx="7" fill="none" stroke="#fb7185" stroke-width="3" stroke-dasharray="12 7"></rect>
+              <rect x="376" y="287" width="108" height="32" rx="5" fill="none" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="5 5"></rect>
+              <text class="stamp-text" x="430" y="311" text-anchor="middle">DOMINADO</text>
+            </g>
+          </svg>
+        </div>
+
+        <svg class="card-particles" id="cardParticles" viewBox="0 0 540 360" aria-hidden="true" focusable="false">
+          <g id="particleLayer"></g>
+        </svg>
+      </div>
+
+      <div class="controls" role="group" aria-label="Controles do flashcard">
+        <button type="button" id="btnPrev" class="btn">
+          <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 12H5"></path><path d="M11 18l-6-6 6-6"></path></svg>
+          Anterior
+        </button>
+        <button type="button" id="btnFlip" class="btn btn-primary">
+          <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a9 9 0 1 1-2.7-6.4"></path><path d="M21 4.5v5h-5"></path></svg>
+          Virar
+        </button>
+        <button type="button" id="btnNext" class="btn">
+          <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+          Próximo
+        </button>
+        <button type="button" id="btnLearned" class="btn btn-success" aria-pressed="false">
+          <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"></path></svg>
+          <span id="btnLearnedLabel">Marcar Aprendido</span>
+        </button>
+        <button type="button" id="btnShuffle" class="btn btn-cyan">
+          <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="3"></rect><circle cx="8.5" cy="8.5" r="1.6" fill="currentColor" stroke="none"></circle><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle><circle cx="15.5" cy="15.5" r="1.6" fill="currentColor" stroke="none"></circle></svg>
+          Embaralhar
+        </button>
+        <button type="button" id="btnDelete" class="btn btn-danger">
+          <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h16"></path><path d="M9 7V4h6v3"></path><path d="M6 7l1 13h10l1-13"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg>
+          Excluir
+        </button>
+        <button type="button" id="btnRestore" class="btn btn-ghost">
+          <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 9h11a5 5 0 0 1 0 10H9"></path><path d="M3 9l4-4"></path><path d="M3 9l4 4"></path></svg>
+          Restaurar Padrão
+        </button>
+      </div>
+    </section>
+
+    <aside class="sidebar" aria-labelledby="titulo-novo">
+      <h2 id="titulo-novo">Novo cartão</h2>
+
+      <form id="cardForm" class="card-form" novalidate>
+        <div class="field">
+          <label for="inputPergunta">Pergunta</label>
+          <textarea id="inputPergunta" name="pergunta" rows="3" maxlength="600" autocomplete="off" required placeholder="Ex.: O que é HTML5?"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="inputResposta">Resposta</label>
+          <textarea id="inputResposta" name="resposta" rows="3" maxlength="600" autocomplete="off" required placeholder="Ex.: É a linguagem de marcação da web."></textarea>
+        </div>
+
+        <p id="formWarning" class="form-warning" role="status" aria-live="polite"></p>
+
+        <button type="submit" id="btnAdd" class="btn btn-primary btn-block">
+          <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+          Adicionar
+        </button>
+      </form>
+
+      <section class="progress-panel" aria-labelledby="titulo-progresso">
+        <h3 id="titulo-progresso">Progresso do baralho</h3>
+
+        <svg id="progressSvg" class="progress-svg" viewBox="0 0 340 104" focusable="false">
+          <text id="progressPct" class="progress-pct" x="16" y="34">0%</text>
+
+          <!-- medidor segmentado: trilho + preenchimento contínuo com divisões estáticas -->
+          <rect class="progress-track" x="16" y="46" width="308" height="26" rx="4"></rect>
+          <rect id="progressFill" class="progress-fill" x="16" y="46" width="0" height="26" rx="4"></rect>
+          <g class="gauge-cells" stroke="#111111" stroke-width="3">
+            <line x1="46.8" y1="46" x2="46.8" y2="72"></line>
+            <line x1="77.6" y1="46" x2="77.6" y2="72"></line>
+            <line x1="108.4" y1="46" x2="108.4" y2="72"></line>
+            <line x1="139.2" y1="46" x2="139.2" y2="72"></line>
+            <line x1="170" y1="46" x2="170" y2="72"></line>
+            <line x1="200.8" y1="46" x2="200.8" y2="72"></line>
+            <line x1="231.6" y1="46" x2="231.6" y2="72"></line>
+            <line x1="262.4" y1="46" x2="262.4" y2="72"></line>
+            <line x1="293.2" y1="46" x2="293.2" y2="72"></line>
+          </g>
+          <rect class="gauge-border" x="16" y="46" width="308" height="26" rx="4" fill="none" stroke="#111111" stroke-width="3"></rect>
+
+          <text id="progressCount" class="progress-count" x="16" y="96">0 de 0</text>
+          <text id="progressDone" class="progress-done is-hidden" x="324" y="96" text-anchor="end">Tudo aprendido!</text>
+        </svg>
+      </section>
+
+      <section class="tips-panel" aria-labelledby="titulo-dicas">
+        <h3 id="titulo-dicas">Como estudar</h3>
+        <ul class="tips">
+          <li>Clique no cartão ou aperte <kbd>Espaço</kbd> para virar.</li>
+          <li>Use <kbd>←</kbd> e <kbd>→</kbd> para trocar de cartão.</li>
+          <li>Marque como aprendido para atualizar o progresso.</li>
+        </ul>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <p class="shortcuts">
+      Atalhos: <kbd>Espaço</kbd> virar cartão &middot; <kbd>←</kbd> anterior &middot; <kbd>→</kbd> próximo &middot; <kbd>Tab</kbd> percorrer os controles
+    </p>
+    <p class="credits">MemoFlash SVG — HTML5 semântico, CSS3 e JavaScript puro, sem frameworks.</p>
+  </footer>
+</body>
+</html>
