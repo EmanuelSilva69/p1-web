@@ -8,22 +8,7 @@ de 3px, sombras duras sem blur, fita washi, clipe de papel e carimbo.
 
 **Stack:** HTML5 semântico · CSS3 · JavaScript puro (ES6+) · zero frameworks · roda direto do `file://`
 
----
 
-## Antes e depois
-
-A versão 1.0 era um painel escuro em gradiente índigo/roxo. O redesign virou uma
-mesa de estudo em papel creme com textura de pontos e um cartão que flutua
-direto sobre ela.
-
-**v1.0 — tema escuro**
-
-![Versão 1.0 com fundo índigo e roxo](docs/antes.png)
-
-**v2.0 — neo-brutalista:** o mesmo código, agora com papel, tinta e papelaria
-(a captura completa está no topo desta página).
-
----
 
 ## O cartão
 
@@ -142,21 +127,6 @@ Não há build, dependências nem instalação. Se preferir servidor local:
 python -m http.server 8080
 ```
 
-## Verificação
-
-Resultado da bateria de testes usada durante o desenvolvimento (suíte
-automatizada + checagens reais via DevTools Protocol):
-
-| cenário | resultado |
-| --- | --- |
-| 1440px — suíte completa | 151/151 |
-| 768px — reload/restauração | 9/9 |
-| 500px — layout adaptativo | 5/5 |
-| 360px real (viewport emulado) | 5/5 |
-| DOM estático com JS desligado | 24/24 |
-| hover, active e foco reais | 5/5 |
-| sessão completa (console/erros/CSP) | 0 eventos |
-| `openspec validate --strict` | válido |
 
 ## Estrutura
 
