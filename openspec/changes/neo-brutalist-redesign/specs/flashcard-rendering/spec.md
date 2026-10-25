@@ -19,7 +19,11 @@ The system SHALL render the current card side inside an `<svg>` element with `vi
 
 #### Scenario: Learned card carries the stamp
 - **WHEN** the displayed card is marked as learned
-- **THEN** a rotated -12° double-dashed ink stamp reading DOMINADO appears at the lower right of the face, and it disappears when the card is unmarked
+- **THEN** a rotated -12° double-dashed ink stamp reading DOMINADO appears at the lower right of the face, fully inside the card surface, and it disappears when the card is unmarked
+
+#### Scenario: Stamp stays clear of the text ink
+- **WHEN** the stamp and the wrapped text are both present
+- **THEN** the stamp sits at least 10px above its previous baseline (rotation center `430,293`, lowest corner no lower than the card's bottom edge) and its group precedes the text element in the DOM, so the text ink always paints over the stamp
 
 ### Requirement: Keep card text inside the card bounds
 The system SHALL lay out wrapped lines within the card's text area so long content remains readable instead of overflowing the SVG viewport.

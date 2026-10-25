@@ -92,19 +92,20 @@
             <!-- clipe de papel no canto superior direito -->
             <path class="clip" d="M456,26 L456,14 C456,5 478,5 478,14 L478,72 C478,88 460,88 460,72 L460,36 C460,28 470,28 470,36 L470,64" fill="none" stroke="#111111" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"></path>
 
+            <!-- carimbo DOMINADO: só aparece quando o cartão está aprendido.
+                 Fica ANTES do texto no DOM: a tinta das linhas pinta por cima dele -->
+            <g id="stampFront" class="stamp is-hidden" transform="rotate(-12 430 293)">
+              <rect x="370" y="271" width="120" height="44" rx="7" fill="none" stroke="#fb7185" stroke-width="3" stroke-dasharray="12 7"></rect>
+              <rect x="376" y="277" width="108" height="32" rx="5" fill="none" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="5 5"></rect>
+              <text class="stamp-text" x="430" y="301" text-anchor="middle">DOMINADO</text>
+            </g>
+
             <text id="cardTextFront" class="card-text" x="96" y="196"><tspan x="96">Flashcard de exemplo</tspan></text>
 
             <text id="emptyFront" class="card-empty is-hidden" x="270" y="182" text-anchor="middle">
               <tspan x="270">O baralho está vazio!</tspan>
               <tspan x="270" dy="30">Adicione um cartão novo.</tspan>
             </text>
-
-            <!-- carimbo DOMINADO: só aparece quando o cartão está aprendido -->
-            <g id="stampFront" class="stamp is-hidden" transform="rotate(-12 430 303)">
-              <rect x="370" y="281" width="120" height="44" rx="7" fill="none" stroke="#fb7185" stroke-width="3" stroke-dasharray="12 7"></rect>
-              <rect x="376" y="287" width="108" height="32" rx="5" fill="none" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="5 5"></rect>
-              <text class="stamp-text" x="430" y="311" text-anchor="middle">DOMINADO</text>
-            </g>
           </svg>
 
           <!-- Verso: RESPOSTA -->
@@ -162,19 +163,20 @@
             <!-- clipe de papel no canto superior direito -->
             <path class="clip" d="M478,14 L478,74 C478,92 460,92 460,74 L460,36 C460,26 471,26 471,36 L471,64" fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
 
+            <!-- carimbo DOMINADO: só aparece quando o cartão está aprendido.
+                 Fica ANTES do texto no DOM: a tinta das linhas pinta por cima dele -->
+            <g id="stampBack" class="stamp is-hidden" transform="rotate(-12 430 293)">
+              <rect x="370" y="271" width="120" height="44" rx="7" fill="none" stroke="#fb7185" stroke-width="3" stroke-dasharray="12 7"></rect>
+              <rect x="376" y="277" width="108" height="32" rx="5" fill="none" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="5 5"></rect>
+              <text class="stamp-text" x="430" y="301" text-anchor="middle">DOMINADO</text>
+            </g>
+
             <text id="cardTextBack" class="card-text" x="96" y="196"><tspan x="96">A resposta aparece ao virar</tspan></text>
 
             <text id="emptyBack" class="card-empty is-hidden" x="270" y="182" text-anchor="middle">
               <tspan x="270">O baralho está vazio!</tspan>
               <tspan x="270" dy="30">Adicione um cartão novo.</tspan>
             </text>
-
-            <!-- carimbo DOMINADO: só aparece quando o cartão está aprendido -->
-            <g id="stampBack" class="stamp is-hidden" transform="rotate(-12 430 303)">
-              <rect x="370" y="281" width="120" height="44" rx="7" fill="none" stroke="#fb7185" stroke-width="3" stroke-dasharray="12 7"></rect>
-              <rect x="376" y="287" width="108" height="32" rx="5" fill="none" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="5 5"></rect>
-              <text class="stamp-text" x="430" y="311" text-anchor="middle">DOMINADO</text>
-            </g>
           </svg>
         </div>
 
