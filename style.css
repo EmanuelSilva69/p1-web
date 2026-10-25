@@ -134,9 +134,18 @@ kbd {
 }
 
 .site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
   padding-top: clamp(20px, 4vw, 40px);
   padding-bottom: clamp(12px, 2vw, 20px);
   border-bottom: var(--border);
+}
+
+.header-id {
+  min-width: 0;
 }
 
 /* título com marca-texto amarelo por baixo (sem depender de fonte externa) */
@@ -158,6 +167,22 @@ kbd {
   margin: 0;
   color: var(--muted);
   font-size: clamp(0.95rem, 2vw, 1.1rem);
+}
+
+/* tag de autoria no estilo carimbo técnico (monoespaçada, levemente torta) */
+.header-tag {
+  margin: 0;
+  padding: 6px 10px;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  background: #ffffff;
+  border: 2px solid var(--ink);
+  border-radius: 5px;
+  box-shadow: 2px 2px 0 var(--ink);
+  transform: rotate(-1.5deg);
 }
 
 .site-footer {
@@ -197,12 +222,23 @@ kbd {
   min-width: 0;
 }
 
-/* painéis: moldura 3px + sombra dura (sem blur) */
+/* a área de estudo não é painel: cartão e controles flutuam na mesa */
 .study {
-  background: transparent;
-  border: none;
+  background: none;
+  border: 0;
+  border-radius: 0;
   box-shadow: none;
   padding: 0;
+}
+
+/* cabeçalho da área: título à esquerda, contador como etiqueta à direita */
+.study-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin: 6px 0 12px;
 }
 
 .sidebar {
@@ -218,17 +254,26 @@ kbd {
 .study h2,
 .sidebar h2 {
   display: inline-block;
+  margin: 0;
   padding-bottom: 4px;
   border-bottom: 4px solid var(--yellow);
 }
 
+/* contador em forma de etiqueta (fundo branco + moldura 2px + sombra dura 2px) */
 .card-counter {
-  margin: 0 0 10px;
-  color: var(--muted);
+  margin: 0;
+  padding: 4px 10px;
+  color: var(--ink);
   font-family: var(--font-mono);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  background: #ffffff;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 var(--ink);
+  transform: rotate(-1deg);
 }
 
 /* ---------- cartão: palco, perspectiva e flip 3D ---------- */
@@ -333,8 +378,8 @@ kbd {
 .controls .btn:nth-child(6),
 .controls .btn:nth-child(7) {
   grid-column: span 3;
-  font-size: 0.88rem;
-  padding: 0.5rem 0.6rem;
+  font-size: 0.84rem;
+  padding: 0.5rem 0.55rem;
 }
 
 .btn {
@@ -440,6 +485,12 @@ kbd {
 
 .field textarea::placeholder {
   color: #71717a;
+}
+
+/* ao escrever: fundo amarelo-papel e sombra deslocada um degrau */
+.field textarea:focus {
+  background: #fefce8;
+  box-shadow: 6px 6px 0 var(--ink);
 }
 
 .form-warning {

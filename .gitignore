@@ -1,0 +1,7 @@
+# ferramenta de agente / configuração local (não faz parte do site)
+.opencode/
+
+# artefatos de build e editores
+Thumbs.db
+.DS_Store
+*.log

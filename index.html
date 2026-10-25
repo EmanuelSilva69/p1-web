@@ -15,15 +15,19 @@
   <a class="skip-link" href="#estudo">Pular para a área de estudo</a>
 
   <header class="site-header">
-    <h1>MemoFlash SVG</h1>
-    <p class="subtitle">Flashcards interativos renderizados em SVG — disciplina de Desenvolvimento de Sistemas Web</p>
+    <div class="header-id">
+      <h1>MemoFlash SVG</h1>
+      <p class="subtitle">Caderno de revisão ativa em SVG para estudos rápidos.</p>
+    </div>
+    <p class="header-tag">UFMA · Eng. da Computação</p>
   </header>
 
   <main class="layout">
     <section id="estudo" class="study" aria-labelledby="titulo-estudo">
-      <h2 id="titulo-estudo">Área de estudo</h2>
-
-      <p id="cardCounter" class="card-counter" aria-live="polite">—</p>
+      <div class="study-head">
+        <h2 id="titulo-estudo">Área de estudo</h2>
+        <p id="cardCounter" class="card-counter" aria-live="polite">—</p>
+      </div>
 
       <div class="card-stage" id="cardStage">
         <div
@@ -67,6 +71,16 @@
             <!-- linha de margem superior (tinta vermelha/coral) -->
             <line class="margin-line" x1="44" y1="100" x2="496" y2="100" stroke="#fb7185" stroke-width="2.5"></line>
 
+            <!-- margem vertical esquerda em tom coral suave -->
+            <line class="margin-line-left" x1="82" y1="100" x2="82" y2="336" stroke="#fb7185" stroke-width="2.5" opacity="0.7"></line>
+
+            <!-- furos de fichário na lateral esquerda (a folha aparece dura) -->
+            <g class="card-holes" fill="#f4f0ea" stroke="#111111" stroke-width="2.5">
+              <circle cx="62" cy="140" r="7"></circle>
+              <circle cx="62" cy="210" r="7"></circle>
+              <circle cx="62" cy="280" r="7"></circle>
+            </g>
+
             <g class="card-badge">
               <rect x="50" y="42" width="216" height="36" rx="8" fill="#fde047" stroke="#111111" stroke-width="2.5"></rect>
               <text id="badgeFront" class="badge-text" x="158" y="66" text-anchor="middle">FRENTE (PERGUNTA)</text>
@@ -76,9 +90,9 @@
             <path class="washi" d="M284,10 L278,17 L284,24 L278,31 L284,38 L278,45 L422,45 L416,38 L422,31 L416,24 L422,17 L416,10 Z" fill="url(#tapePatternFront)" stroke="#111111" stroke-width="2" opacity="0.85" transform="rotate(-3 350 27)"></path>
 
             <!-- clipe de papel no canto superior direito -->
-            <<path class="clip" d="M456,26 L456,14 C456,5 478,5 478,14 L478,72 C478,88 460,88 460,72 L460,36 C460,28 470,28 470,36 L470,64" fill="none" stroke="#111111" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path class="clip" d="M456,26 L456,14 C456,5 478,5 478,14 L478,72 C478,88 460,88 460,72 L460,36 C460,28 470,28 470,36 L470,64" fill="none" stroke="#111111" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"></path>
 
-            <text id="cardTextFront" class="card-text" x="56" y="196"><tspan x="56">Flashcard de exemplo</tspan></text>
+            <text id="cardTextFront" class="card-text" x="96" y="196"><tspan x="96">Flashcard de exemplo</tspan></text>
 
             <text id="emptyFront" class="card-empty is-hidden" x="270" y="182" text-anchor="middle">
               <tspan x="270">O baralho está vazio!</tspan>
@@ -127,6 +141,16 @@
             <!-- linha de margem superior (tinta vermelha/coral) -->
             <line class="margin-line" x1="44" y1="100" x2="496" y2="100" stroke="#fb7185" stroke-width="2.5"></line>
 
+            <!-- margem vertical esquerda em tom coral suave -->
+            <line class="margin-line-left" x1="82" y1="100" x2="82" y2="336" stroke="#fb7185" stroke-width="2.5" opacity="0.7"></line>
+
+            <!-- furos de fichário na lateral esquerda (a folha aparece dura) -->
+            <g class="card-holes" fill="#f4f0ea" stroke="#111111" stroke-width="2.5">
+              <circle cx="62" cy="140" r="7"></circle>
+              <circle cx="62" cy="210" r="7"></circle>
+              <circle cx="62" cy="280" r="7"></circle>
+            </g>
+
             <g class="card-badge">
               <rect x="50" y="42" width="216" height="36" rx="8" fill="#fde047" stroke="#111111" stroke-width="2.5"></rect>
               <text id="badgeBack" class="badge-text" x="158" y="66" text-anchor="middle">VERSO (RESPOSTA)</text>
@@ -138,7 +162,7 @@
             <!-- clipe de papel no canto superior direito -->
             <path class="clip" d="M478,14 L478,74 C478,92 460,92 460,74 L460,36 C460,26 471,26 471,36 L471,64" fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
 
-            <text id="cardTextBack" class="card-text" x="56" y="196"><tspan x="56">A resposta aparece ao virar</tspan></text>
+            <text id="cardTextBack" class="card-text" x="96" y="196"><tspan x="96">A resposta aparece ao virar</tspan></text>
 
             <text id="emptyBack" class="card-empty is-hidden" x="270" y="182" text-anchor="middle">
               <tspan x="270">O baralho está vazio!</tspan>
@@ -255,7 +279,7 @@
     <p class="shortcuts">
       Atalhos: <kbd>Espaço</kbd> virar cartão &middot; <kbd>←</kbd> anterior &middot; <kbd>→</kbd> próximo &middot; <kbd>Tab</kbd> percorrer os controles
     </p>
-    <p class="credits">MemoFlash SVG — HTML5 semântico, CSS3 e JavaScript puro, sem frameworks.</p>
+    <p class="credits">Desenvolvido por Emanuel Lopes Silva · UFMA (EECP0036)</p>
   </footer>
 </body>
 </html>

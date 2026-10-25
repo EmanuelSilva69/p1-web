@@ -14,8 +14,8 @@ const STORAGE_KEY = 'memoflash-v1';
 
 /* limites de layout do texto no SVG (viewBox 540x360) */
 const MAX_LINE_CHARS = 38;
-const TEXT_X = 56;
-const TEXT_MAX_WIDTH = 418;
+const TEXT_X = 96;
+const TEXT_MAX_WIDTH = 388;
 const TEXT_TOP = 118;
 const TEXT_BOTTOM = 268;
 const TEXT_CENTER_Y = (TEXT_TOP + TEXT_BOTTOM) / 2;
