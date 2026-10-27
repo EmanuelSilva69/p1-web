@@ -143,6 +143,12 @@ p1-web/
 └── docs/         capturas usadas neste README
 ```
 
+## Declaração de Uso de Inteligência Artificial
+
+* **Ferramenta utilizada:** Gemini (Google).
+* **Finalidade:** Auxílio na estruturação organizacional do código, suporte na validação de restrições técnicas (como o uso estrito de `.textContent` e manipulação de elementos SVG).
+* **Contribuição do estudante:** Todo o fluxo de testes, refinamento visual, ajustes finos do projeto e tomada de decisões de implementação foram analisados, testados e validados manualmente por mim.
+
 ## Autoria
 
 Desenvolvido por Emanuel Lopes Silva · UFMA (EECP0036)
