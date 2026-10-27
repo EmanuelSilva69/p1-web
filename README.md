@@ -140,8 +140,7 @@ p1-web/
 ├── index.html    markup semântico + SVG estático das duas faces
 ├── style.css     tokens, superfície de papel, molduras e microanimações
 ├── script.js     estado único + render explícito, sem framework
-├── docs/         capturas usadas neste README
-└── openspec/     specs e tasks das mudanças (workflow OpenSpec)
+└── docs/         capturas usadas neste README
 ```
 
 ## Autoria
