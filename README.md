@@ -127,6 +127,11 @@ Não há build, dependências nem instalação. Se preferir servidor local:
 python -m http.server 8080
 ```
 
+## Rede
+![Captura da Aba Rede](./docs/redep1web.png)
+Lembrando que usei a Trilha C:
+A imagem da aba Rede (Network) do navegador demonstra a requisição HTTP GET realizada ao servidor local (http://localhost:8000/), que retornou o código de status 200 OK com sucesso. Como a aplicação opera na Trilha C, todo o conteúdo estático (index.html, style.css e script.js) é executado diretamente no navegador do usuário, com persistência de dados gerenciada localmente via localStorage.
+
 
 ## Estrutura
 
